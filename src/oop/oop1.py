@@ -17,3 +17,27 @@
 #     pass
 #
 # Put a comment noting which class is the base class
+
+# Base class for all the classes here
+class Vehicle:
+  pass
+
+class FlightVehicle(Vehicle):
+  pass
+
+class Starship(FlightVehicle):
+  pass
+
+class Airplane(Starship):
+  pass
+
+class GroundVehicle(Vehicle):
+  pass
+
+class Car(GroundVehicle):
+  pass
+
+class Motorcycle(GroundVehicle):
+  pass
+
+#This file assignment is done. Did not write any unnecessary comments as it straight forward.
