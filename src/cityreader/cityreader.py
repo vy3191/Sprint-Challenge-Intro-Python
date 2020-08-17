@@ -11,7 +11,7 @@ class City:
     self.lon = lon
 
   def __str__(self):
-    return f"{self.name}@{self.lat} and {self.lon}"
+    return f"{self.name} @ {self.lat} and {self.lon}"
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -92,12 +92,13 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
   if lat1 > lat2:
     [lat1, lat2] = [lat2, lat1]
-  # if lon1 > lon2:
-  #   [lon1, lon2]   = [lon2, lon1]
+  if lon1 > lon2:
+    [lon1, lon2]   = [lon2, lon1]
   print('lat1', lat1)
   print('lat2', lat2)
   print('lon1', lon1)
   print('lon2', lon2)
+
   within = []  
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
@@ -105,12 +106,22 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     total_city = str(city).split("@")
     city_name = total_city[0]
     lat = total_city[1].split("and")[0]
-    lon = total_city[1].split("and")[1]    
-  
-    if (float(lat) >= lat1 and float(lat) <= lat2):
-      within.append(city)
+    lon = total_city[1].split("and")[1]
 
+    if float(lat) >= lat1:
+      if float(lat) <= lat2:
+        if float(lon) >= lon1:
+          if float(lon) < lon2:
+            tuple_list = []
+            tuple_list.append(lat.strip())
+            tuple_list.append(lon.strip())
+            city_tuple = tuple(tuple_list)
+            city_details = f"{city_name}: {city_tuple}"
+            within.append(city_details)
   return within
 
 
-cityreader_stretch(lat1, lon1, lat2, lon2, cities)
+final_results = cityreader_stretch(lat1, lon1, lat2, lon2, cities)
+
+for result in final_results:
+  print(result)
